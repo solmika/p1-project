@@ -1,0 +1,1 @@
+We used AI to help us brainstorm and to find free APIs.
