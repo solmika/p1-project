@@ -7,8 +7,9 @@ from dotenv import load_dotenv
 load_dotenv()
 key = os.getenv("NPS_API_KEY")
 
+user_input = input("Please enter a state code (e.g., WA, CA, NY): ")
 url = "https://developer.nps.gov/api/v1/parks"
-params = {"stateCode": "WA", "api_key": key}
+params = {"q": user_input, "api_key": key}
 response = requests.get(url, params=params)
 
 if response.status_code == 200:
