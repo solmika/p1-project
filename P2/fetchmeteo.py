@@ -13,6 +13,9 @@ params = {
 }
 response = requests.get(url,params=params, timeout=10)
 
+def display_weather_data(data):
+    
+
 if response.status_code == 200:
     data = (response.json())
     pprint.pprint(data)
