@@ -13,12 +13,21 @@ params = {
 }
 response = requests.get(url,params=params, timeout=10)
 
+# Function to display weather data from the API response
 def display_weather_data(data):
-    
+    for i in range(len(data['daily']['time'])):
+        print(f"Date: {data['daily']['time'][i]}")
+        print(f"Max Temperature: {data['daily']['temperature_2m_max'][i]} degrees Celsius")
+        print(f"Min Temperature: {data['daily']['temperature_2m_min'][i]} degrees Celsius")
+        print(f"Max UV Index: {data['daily']['uv_index_max'][i]}")
+        print(f"Max Wind Speed: {data['daily']['wind_speed_10m_max'][i]} km/h")
+        print(f"Max Precipitation Probability: {data['daily']['precipitation_probability_max'][i]}%")
+        print()
 
 if response.status_code == 200:
     data = (response.json())
-    pprint.pprint(data)
+    display_weather_data(data)
+    #pprint.pprint(data)
 else:
     print("Status Code:", response.status_code, "Reason:", response.reason) 
 
