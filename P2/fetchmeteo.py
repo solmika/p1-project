@@ -24,7 +24,7 @@ def display_weather_data(data):
         print(f"Min Temperature: {data['daily']['temperature_2m_min'][i]} degrees Fahrenheit")
         print(f"UV Index: {data['daily']['uv_index_max'][i]}")
         print(f"Max Wind Speed: {data['daily']['wind_speed_10m_max'][i]} mph")
-        print(f"Max Precipitation Probability: {data['daily']['precipitation_probability_max'][i]}%")
+        print(f"Precipitation Probability: {data['daily']['precipitation_probability_max'][i]}%")
         print()
 
 if response.status_code == 200:
