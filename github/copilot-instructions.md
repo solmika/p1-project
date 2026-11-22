@@ -22,26 +22,21 @@ We're a pair of design students in HCDE 310, learning Python and Flask.
 - Do not expose API keys or secrets in source files, templates, prompts, logs, or committed documentation.
 
 ## Our project
-The working direction is a small Flask web app for parents who want to cook an adult-friendly and a kid-friendly version of the same recipe, reducing the need to prepare separate meals.
+The working direction is a small Flask web app for National Park visitors to find National Park information on campgrounds and things to do within the parks and to also check the weather conditions for their planned visit.
 
-- Primary concept: let a user enter a main ingredient, return matching recipe options, compare an adult and simplified kid-friendly version, and view recipe details.
-- Lens/depth: recipes, kid-friendly adaptations, instructions, nutrition, and cost information.
-- Core noun: `Recipe`; its intended fields are `title`, `original_version`, `kid_version`, and `nutrition`.
-- Persistence decision: recipes saved by a user must remain available after reload.
-- User flow under consideration: search by main ingredient -> review result options -> compare versions -> select a recipe -> save it with a heart-style control.
-- Planned APIs: TheMealDB and Spoonacular. API-specific endpoints, limits, authentication, caching, and error behavior are not decided.
+- Primary concept: let a user enter a US state and return a list of National parks, then be able to select a park to view its campgrounds and activities and then select dates within the next two weeks to check weather conditions for their planned visit. Alternatively, a user can enter a National Park name, return matching campgrounds and activities, and view weather conditions for their planned visit. We will be using the National Park Service API and Open Meteo API to fetch this data.
+- Lens/depth: National parks, campgrounds, activities, and weather conditions for planned visits. User will be able to login and save their selections. User will also receive emails with National Park Service alerts for their saved parks.
+- Core noun: `NationalPark`; its intended fields are `name`, `state`, `campgrounds`, `activities`, and `weather`.
+- Persistence decision: National Park information and user selections must remain available after reload.
+- User flow under consideration: search by state or park name -> review result options -> select a park -> view campgrounds and activities -> select dates -> check weather conditions.
+- Planned APIs: National Park Service API and Open Meteo API. API-specific endpoints, limits, authentication, caching, and error behavior are not decided.
 - Source-of-truth documents: `p1.md` contains the concept, `inclass13.md` contains the initial noun/persistence decision, and `requirements.txt` contains the current dependencies.
 - There is no application code in the repository yet. Do not infer a folder structure or framework conventions beyond Flask.
 
 ## Not decided yet
-- Which concept to implement, if the team does not confirm Concept 1.
 - Which API is the primary source and whether both APIs are needed.
-- Spoonacular API key availability, usage limits, and the exact fields we can retrieve.
-- Whether signup/login is required or saving will initially use a simpler browser/server persistence mechanism.
-- How adult and kid-friendly recipes should be generated or adapted: API data, app transformation rules, or AI-assisted text.
-- The exact recipe data model, routes, template structure, save behavior, and testing setup.
-- Desktop/mobile layout details, visual design, cost calculation, and nutrition display.
-- How we should handle API failures, empty searches, invalid ingredients, loading states, and rate limits.
+- Open Meteo API key availability, usage limits, and the exact fields we can retrieve.
+
 
 ## Wrap up
 When we say "wrap up":
