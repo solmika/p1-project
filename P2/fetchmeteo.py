@@ -8,6 +8,9 @@ params = {
 	"longitude": 13.41,
 	"daily": ["temperature_2m_max", "temperature_2m_min", "uv_index_max", "wind_speed_10m_max", "precipitation_probability_max"],
 	"timezone": "auto",
+    "wind_speed_unit": "mph",
+	"temperature_unit": "fahrenheit",
+	"precipitation_unit": "inch",
 	"start_date": "2026-11-15",
 	"end_date": "2026-11-29",
 }
@@ -17,10 +20,10 @@ response = requests.get(url,params=params, timeout=10)
 def display_weather_data(data):
     for i in range(len(data['daily']['time'])):
         print(f"Date: {data['daily']['time'][i]}")
-        print(f"Max Temperature: {data['daily']['temperature_2m_max'][i]} degrees Celsius")
-        print(f"Min Temperature: {data['daily']['temperature_2m_min'][i]} degrees Celsius")
+        print(f"Max Temperature: {data['daily']['temperature_2m_max'][i]} degrees Fahrenheit")
+        print(f"Min Temperature: {data['daily']['temperature_2m_min'][i]} degrees Fahrenheit")
         print(f"Max UV Index: {data['daily']['uv_index_max'][i]}")
-        print(f"Max Wind Speed: {data['daily']['wind_speed_10m_max'][i]} km/h")
+        print(f"Max Wind Speed: {data['daily']['wind_speed_10m_max'][i]} mph")
         print(f"Max Precipitation Probability: {data['daily']['precipitation_probability_max'][i]}%")
         print()
 
