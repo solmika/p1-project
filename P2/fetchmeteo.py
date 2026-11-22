@@ -17,3 +17,6 @@ if response.status_code == 200:
     pprint.pprint(data)
 else:
     print("Status Code:", response.status_code, "Reason:", response.reason) 
+
+print("https://open-meteo.com/")
+print("Weather data by Open-Meteo.com")
