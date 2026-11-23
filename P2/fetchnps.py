@@ -15,7 +15,7 @@ camp_res = requests.get(camp_url, params=params).json()
 for camp in camp_res["data"]:
     print("Name:", camp.get("name", "N/A"))
     print("Description:", camp.get("description", "N/A"))
-    print("Booking Link:", camp.get("reservationUrl", "N/A"))
+
 
 
 to_do_url = "https://developer.nps.gov/api/v1/thingstodo"
