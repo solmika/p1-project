@@ -17,7 +17,7 @@ for camp in camp_res["data"]:
     print("Description:", camp.get("description", "N/A"))
     print("Booking Link:", camp.get("reservationUrl", "N/A"))
 
-print()
+
 to_do_url = "https://developer.nps.gov/api/v1/thingstodo"
 to_do_res = requests.get(to_do_url, params=params).json()
 for to_do in to_do_res["data"]:

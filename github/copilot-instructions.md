@@ -34,8 +34,11 @@ The working direction is a small Flask web app for National Park visitors to fin
 - There is no application code in the repository yet. Do not infer a folder structure or framework conventions beyond Flask.
 
 ## Not decided yet
-- Which API is the primary source and whether both APIs are needed.
-- Open Meteo API key availability, usage limits, and the exact fields we can retrieve.
+-How will we save email addresses for users?
+-How to send users emails about National Park Service alerts for their saved parks.
+-How to store login credentials for users.
+-How to have a timer check for alerts and send email notifications to users.
+-How exactly to combine data from the National Park Service API and Open Meteo API for displa
 
 
 ## Wrap up
