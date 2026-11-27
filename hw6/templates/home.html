@@ -4,11 +4,11 @@
 <body>
   <h1>National Park Information</h1>
   <p>Enter a state name in abbreviated form (e.g., "NY" for New York) and find a list of National Parks in that state.
-     <a href="/lesson">Your saved parks: ({{ park_count }} saved)</a></p>
+     <a href="/saved">Saved parks: ({{ park_count }} saved)</a></p>
 
-  <form action="/search">
-    <label for="place">A place</label>
-    <input id="place" name="place" value="{{ place }}" placeholder="Jakarta">
+  <form action="/results">
+    <label for="stateCode">Enter a state:</label>
+    <input id="stateCode" name="stateCode" value="{{ stateCode }}" placeholder="WA">
     <button>Find parks</button>
   </form>
 

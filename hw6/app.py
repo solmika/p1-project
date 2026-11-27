@@ -10,15 +10,15 @@ app = Flask(__name__)
 def home():
    return render_template("home.html")
 
-@app.route("/search")
-def search():
-    typed = request.args.get("place", "").strip()
+@app.route("/results")
+def results():
+    typed = request.args.get("stateCode", "").strip()
     if not typed:
         return search_page(error="Type a place to search.")
     try:
         here = find_place(typed)                              # API 1: what is this place?
         if here is None:
-            return search_page(place=typed, error=f"We couldn't find \"{typed}\". Check the spelling, or try a nearby city.")
+            return search_page(stateCode=typed, error=f"We couldn't find \"{typed}\". Check the spelling, or try a nearby city.")
         names = list(dict.fromkeys([typed, here["name"]]))   # what they typed + Nominatim's name ("Special Capital Region of Jakarta")
         city = artworks_about(names)                          # API 2: art made there, named in the title, or about it
         wider = None
@@ -26,8 +26,8 @@ def search():
             shown = {art["link"] for art in city[1]}
             wider = artworks_about([here["country"]], skip=shown)   # API 2 again, with API 1's country as input
     except requests.RequestException:
-        return search_page(place=typed, error="Something's down. Please try again in a few minutes.")
-    return search_page(place=typed, country=here["country"], city=city, wider=wider)
+        return search_page(stateCode=typed, error="Something's down. Please try again in a few minutes.")
+    return search_page(stateCode=typed, country=here["country"], city=city, wider=wider)
 
 
 @app.route("/save", methods=["POST"])
