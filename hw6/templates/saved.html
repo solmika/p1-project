@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>My lesson: Art From a Place</title></head>
+<body>
+  <h1>My lesson</h1>
+  <p><a href="/">Find more art</a></p>
+
+  {% if not artworks %}
+    <p>Nothing saved yet. Search for a place and click "Save to my lesson."</p>
+  {% else %}
+    <p>{{ artworks|length }} artworks saved</p>
+    <ul>
+    {% for art in artworks %}
+      <li>
+        {% if art.image %}<img src="{{ art.image }}" alt="{{ art.title }}" width="120">{% endif %}
+        <a href="{{ art.link }}">{{ art.title }}</a>, {{ art.artist }}<br>
+        Made in {{ art.made_in }} ({{ art.date }})
+        <form action="/remove" method="post">
+          <input type="hidden" name="link" value="{{ art.link }}">
+          <button>Remove</button>
+        </form>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>

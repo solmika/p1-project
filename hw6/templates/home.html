@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Art From a Place</title></head>
+<body>
+  <h1>Art From a Place</h1>
+  <p>Find artworks from the Art Institute of Chicago connected to a place, and save them for your lesson.
+     <a href="/lesson">Your lesson ({{ lesson_count }} saved)</a></p>
+
+  <form action="/search">
+    <label for="place">A place</label>
+    <input id="place" name="place" value="{{ place }}" placeholder="Jakarta">
+    <button>Find art</button>
+  </form>
+
+  {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+
+  {% macro artwork_list(artworks) %}
+    <ul>
+    {% for art in artworks %}
+      <li>
+        {% if art.image %}<img src="{{ art.image }}" alt="{{ art.title }}" width="120">{% endif %}
+        <a href="{{ art.link }}">{{ art.title }}</a>, {{ art.artist }} ({{ art.date }})<br>
+        Made in {{ art.made_in }}
+        <form action="/save" method="post">
+          {% for key in ["title", "artist", "made_in", "date", "image", "link"] %}
+            <input type="hidden" name="{{ key }}" value="{{ art[key] or '' }}">
+          {% endfor %}
+          <button>Save to my lesson</button>
+        </form>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endmacro %}
+
+  {% if city %}
+    <h2>{{ place }}: {{ city[0] }} artworks</h2>
+    {% if city[1] %}{{ artwork_list(city[1]) }}{% else %}<p>No artworks connected to {{ place }}.</p>{% endif %}
+  {% endif %}
+
+  {% if wider %}
+    <h2>More from {{ country }}: {{ wider[0] }} artworks</h2>
+    {% if wider[1] %}{{ artwork_list(wider[1]) }}{% else %}<p>Nothing more from {{ country }}.</p>{% endif %}
+  {% endif %}
+</body>
+</html>
