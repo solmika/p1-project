@@ -25,7 +25,7 @@
           {% for key in ["title", "artist", "made_in", "date", "image", "link"] %}
             <input type="hidden" name="{{ key }}" value="{{ art[key] or '' }}">
           {% endfor %}
-          <button>Save to my lesson</button>
+          <button>Save to my saved parks</button>
         </form>
       </li>
     {% endfor %}
