@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><title>Art From a Place</title></head>
+<head><meta charset="utf-8"><title>National Park Information</title></head>
 <body>
-  <h1>Art From a Place</h1>
-  <p>Find artworks from the Art Institute of Chicago connected to a place, and save them for your lesson.
-     <a href="/lesson">Your lesson ({{ lesson_count }} saved)</a></p>
+  <h1>National Park Information</h1>
+  <p>Enter a state name in abbreviated form (e.g., "NY" for New York) and find a list of National Parks in that state.
+     <a href="/lesson">Your saved parks: ({{ park_count }} saved)</a></p>
 
   <form action="/search">
     <label for="place">A place</label>
     <input id="place" name="place" value="{{ place }}" placeholder="Jakarta">
-    <button>Find art</button>
+    <button>Find parks</button>
   </form>
 
   {% if error %}<p role="alert">{{ error }}</p>{% endif %}
