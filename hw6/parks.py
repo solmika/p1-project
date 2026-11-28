@@ -11,7 +11,7 @@ load_dotenv()
 def search_parks(term):
     try:
         key = os.getenv("NPS_API_KEY")
-        FIELDS = "line2,description,thumbnail"
+        FIELDS = "fullName,description"
         headers = {"NPS-User-Agent": "HCDE310 student project"}
         url = "https://developer.nps.gov/api/v1/parks"
         params ={"q": term, "fields": FIELDS, "api_key": key}
