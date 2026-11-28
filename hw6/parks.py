@@ -10,7 +10,7 @@ load_dotenv()
 def search_parks(term):
     try:
         key = os.getenv("NPS_API_KEY")
-        FIELDS = "fullName,description"
+        FIELDS = "fullName,description,latLong"
         headers = {"NPS-User-Agent": "HCDE310 student project"}
         url = "https://developer.nps.gov/api/v1/parks"
         params ={"q": term, "fields": FIELDS, "api_key": key}
@@ -36,6 +36,8 @@ def search_parks(term):
 results = search_parks("WA")
 for c in results:
         print(f"Park name: {c['fullName']}\nDescription: {c['description']}\n")
+        latitude, longitude = c['latLong'].split(',')
+
 
     
 
