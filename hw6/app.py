@@ -1,36 +1,31 @@
+import os
+from dotenv import load_dotenv
 import requests
 from flask import Flask, redirect, render_template, request
 
-from parks import Parks
+from parks import parks_by_state
 from weather import Weather
 
+load_dotenv()
+NPS_KEY = os.getenv("NPS_API_KEY")
 app = Flask(__name__)
 
-def results_page(place="", country=None, city=None, wider=None, error=None):
-    return render_template("index.html", place=place, country=country, city=city, wider=wider, error=error,
-                           lesson_count=len(load_lesson()))
 @app.route("/")
 def home():
    return render_template("home.html")
 
 @app.route("/results")
 def results():
-    typed = request.args.get("stateCode", "").strip()
-    if not typed:
-        return results_page(error="Type a state (in abbreviated form) to search.")
+    typed_state = request.args.get("stateCode", "").strip()
+    if not typed_state:
+        return render_template("home.html", error="Type a state (in abbreviated form) to search.")
     try:
-        here = find_state(typed)
-        if here is None:
-            return results_page(stateCode=typed, error=f"We couldn't find parks in \"{typed}\". Check the spelling or ensure that the state is in abbreviated form.")
-        names = list(dict.fromkeys([typed, here["name"]]))
-        city = artworks_about(names)                       
-        wider = None
-        if here["country"] and here["country"] not in names:
-            shown = {art["link"] for art in city[1]}
-            wider = artworks_about([here["country"]], skip=shown)
+        parks = parks_by_state(typed_state)
+        if parks is None:
+            return render_template("home.html", error=f"We couldn't find parks in \"{typed_state}\". Check the spelling or ensure that the state is in abbreviated form.")
     except requests.RequestException:
-        return results_page(stateCode=typed, error="Something's down. Please try again in a few minutes.")
-    return results_page(stateCode=typed, country=here["country"], city=city, wider=wider)
+        return render_template("home.html", error="Something's down. Please try again in a few minutes.")
+    return render_template("results.html", state=typed_state, parks=parks)
 
 
 @app.route("/save", methods=["POST"])
