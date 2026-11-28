@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import requests
 from flask import Flask, redirect, render_template, request
 
-from parks import parks_by_state
+from parks import search_parks
 from weather import Weather
 
 load_dotenv()
@@ -20,7 +20,7 @@ def results():
     if not typed_state:
         return render_template("home.html", error="Type a state (in abbreviated form) to search.")
     try:
-        parks = parks_by_state(typed_state)
+        parks = search_parks(typed_state)
         if parks is None:
             return render_template("home.html", error=f"We couldn't find parks in \"{typed_state}\". Check the spelling or ensure that the state is in abbreviated form.")
     except requests.RequestException:
